@@ -117,11 +117,17 @@ public class Regras extends EnquantoBaseListener {
 		valores.insira(ctx, new Enquanto(condicao, comando));
 	}
 	public void exitPara(ParaContext ctx) {
-		private final Comando inicializacao = valores.pegue(ctx.comando());;
-		private final Bool condicao = valores.pegue(ctx.booleano());;
-		private final Comando incremento = valores.pegue(ctx.comando());;
-    	private final Comando corpo = valores.pegue(ctx.comando());;
+		private final Comando inicializacao = valores.pegue(ctx.comando());
+		private final Bool condicao = valores.pegue(ctx.booleano());
+		private final Comando incremento = valores.pegue(ctx.comando());
+    	private final Comando corpo = valores.pegue(ctx.comando());
 		valores.insira(ctx, new Para(inicializacao, condicao, corpo, incre));
+	}
+
+		public void exitRepita(RepitaContext ctx) {
+		private final Comando repetir; = valores.pegue(ctx.comando());
+    	private final Comando objetivo = valores.pegue(ctx.comando());
+		valores.insira(ctx, new Repita(repetir, objetivo));
 	}
 
 	@Override

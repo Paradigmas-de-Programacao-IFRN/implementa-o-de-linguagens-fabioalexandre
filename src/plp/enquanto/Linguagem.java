@@ -115,17 +115,15 @@ interface Linguagem {
 	// Tarefa 06
 	class Repita implements Comando{
 		private final Comando repetir;
-		private final Comando incremento;
 		private final Comando objetivo;
-		public Repita(Comando repetir,Comando incremento, Comando objetivo){
-			this.incremento = incremento;
-			this.inicializacao = inicializacao;
+		public Repita implements(Comando repetir,Comando objetivo){
+			this.incremento = repetir;
 			this.objetivo = objetivo;
 		}
 		@Override void execute(){
 			while (repetir.getValor()){
 				objetivo.execute();
-				incremento.execute();
+
 			}
 		}
 	}
