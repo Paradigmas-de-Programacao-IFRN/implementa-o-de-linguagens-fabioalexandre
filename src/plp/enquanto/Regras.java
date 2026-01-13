@@ -103,6 +103,8 @@ public class Regras extends EnquantoBaseListener {
 		final Expressao exp = switch (op) {
 			case "*" -> new ExpMult(esq, dir);
 			case "-" -> new ExpSub(esq, dir);
+			case "/" -> new ExpDiv(esq, dir);
+			case "**" -> new ExpExpo(esq, dir);
 			default  -> new ExpSoma(esq, dir);
 		};
 		valores.insira(ctx, exp);
@@ -113,6 +115,13 @@ public class Regras extends EnquantoBaseListener {
 		final Bool condicao = valores.pegue(ctx.booleano());
 		final Comando comando = valores.pegue(ctx.comando());
 		valores.insira(ctx, new Enquanto(condicao, comando));
+	}
+	public void exitPara(ParaContext ctx) {
+		private final Comando inicializacao = valores.pegue(ctx.comando());;
+		private final Bool condicao = valores.pegue(ctx.booleano());;
+		private final Comando incremento = valores.pegue(ctx.comando());;
+    	private final Comando corpo = valores.pegue(ctx.comando());;
+		valores.insira(ctx, new Para(inicializacao, condicao, corpo, incre));
 	}
 
 	@Override
@@ -132,6 +141,18 @@ public class Regras extends EnquantoBaseListener {
 	public void exitNaoLogico(NaoLogicoContext ctx) {
 		final Bool b = valores.pegue(ctx.booleano());
 		valores.insira(ctx, new NaoLogico(b));
+	}
+	@Override
+	public void exitExpOU(ExpOUContext ctx) {
+		final Bool a = valores.pegue(ctx.booleano());
+		final Bool b = valores.pegue(ctx.booleano());
+		valores.insira(ctx, new ExpOU(a,b));
+	}
+	@Override
+	public void exitExpXOU(ExpXOUContext ctx) {
+		final Bool a = valores.pegue(ctx.booleano());
+		final Bool b = valores.pegue(ctx.booleano());
+		valores.insira(ctx, new ExpXOU(a,b));
 	}
 
 	@Override
@@ -155,6 +176,10 @@ public class Regras extends EnquantoBaseListener {
 		final Bool exp = switch (op) {
 			case "="  -> new ExpIgual(esq, dir);
 			case "<=" -> new ExpMenorIgual(esq, dir);
+			case "<" -> new ExpMenorQue(esq, dir);
+			case ">" -> new ExpMaiorQue(esq, dir);
+			case ">=" -> new ExpMaiorIgual(esq, dir);
+			case "<>" -> new ExpDiferente(esq, dir);
 			default   -> new ExpIgual(esq, esq);
 		};
 		valores.insira(ctx, exp);
