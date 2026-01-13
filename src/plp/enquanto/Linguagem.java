@@ -124,16 +124,16 @@ interface Linguagem {
 			this.objetivo = objetivo;
 		}
 		@Override void execute(){
-			while (repetir.getValor()){
+			for (int i = 0; i < repetir.getValor(); i++){
 				objetivo.execute();
-
 			}
 		}
 	}
+	// Tarefa 10
 	class Exiba implements Comando {
-		private final String texto;
+		private final Object texto;
 
-		public Exiba(String texto) {
+		public Exiba(Object texto) {
 			this.texto = texto;
 		}
 
