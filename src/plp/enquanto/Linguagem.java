@@ -33,7 +33,7 @@ interface Linguagem {
 			comandos.forEach(Comando::execute);
 		}
 	}
-
+	// Tarefa 07
 	class Se implements Comando {
 		private final Bool condicao;
 		private final Comando entao;
@@ -49,6 +49,9 @@ interface Linguagem {
 		public void execute() {
 			if (condicao.getValor())
 				entao.execute();
+			else if (condicao.getValor()){
+				entao.execute();
+			}
 			else
 				senao.execute();
 		}
@@ -96,7 +99,7 @@ interface Linguagem {
 		private final Comando incremento;
     	private final Comando corpo;
 
-		public Para implements(Comando inicializacao, Bool condicao,Comando incremento, Comando corpo) {
+		public Para (Comando inicializacao, Bool condicao,Comando incremento, Comando corpo) {
 			this.inicializacao = inicializacao;
         	this.condicao = condicao;
         	this.incremento = incremento;
@@ -114,10 +117,10 @@ interface Linguagem {
 	}
 	// Tarefa 06
 	class Repita implements Comando{
-		private final Comando repetir;
+		private final Expressao repetir;
 		private final Comando objetivo;
-		public Repita implements(Comando repetir,Comando objetivo){
-			this.incremento = repetir;
+		public Repita (Expressao repetir,Comando objetivo){
+			this.repetir = repetir;
 			this.objetivo = objetivo;
 		}
 		@Override void execute(){
@@ -225,6 +228,26 @@ interface Linguagem {
 		}
 	}
 
+	// Tarefa 08
+	class Escolha implements Comando{
+		private final Bool condicao;
+		private final Comando leia;
+		private final Comando saida;
+		public Escolha(Comando leia, Bool condicao, Comando saida){
+			this.leia = leia;
+			this.condicao = condicao;
+			this.saida = saida;
+		}
+		@Override
+		public void execute(){
+			leia.execute();
+			if (condicao.getValor()){
+				saida.execute();
+			}
+			
+		}
+	
+}
 	class ExpSoma extends OpBin<Expressao> implements Expressao {
 		ExpSoma(Expressao esq, Expressao dir) {
 			super(esq, dir);

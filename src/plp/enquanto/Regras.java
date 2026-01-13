@@ -116,17 +116,17 @@ public class Regras extends EnquantoBaseListener {
 		final Comando comando = valores.pegue(ctx.comando());
 		valores.insira(ctx, new Enquanto(condicao, comando));
 	}
-	public void exitPara(ParaContext ctx) {
-		private final Comando inicializacao = valores.pegue(ctx.comando());
-		private final Bool condicao = valores.pegue(ctx.booleano());
-		private final Comando incremento = valores.pegue(ctx.comando());
-    	private final Comando corpo = valores.pegue(ctx.comando());
-		valores.insira(ctx, new Para(inicializacao, condicao, corpo, incre));
+	public void exitPara(EnquantoContextt ctx) {
+		final Comando inicializacao = valores.pegue(ctx.comando());
+		final Bool condicao = valores.pegue(ctx.booleano());
+		final Comando incremento = valores.pegue(ctx.comando());
+    	final Comando corpo = valores.pegue(ctx.comando());
+		valores.insira(ctx, new Para(inicializacao, condicao, corpo, incremento));
 	}
 
-		public void exitRepita(RepitaContext ctx) {
-		private final Comando repetir; = valores.pegue(ctx.comando());
-    	private final Comando objetivo = valores.pegue(ctx.comando());
+	public void exitRepita(EnquantoContext ctx) {
+		final Expressao repetir = valores.pegue(ctx.comando());
+    	final Comando objetivo = valores.pegue(ctx.comando());
 		valores.insira(ctx, new Repita(repetir, objetivo));
 	}
 
@@ -148,17 +148,17 @@ public class Regras extends EnquantoBaseListener {
 		final Bool b = valores.pegue(ctx.booleano());
 		valores.insira(ctx, new NaoLogico(b));
 	}
-	@Override
-	public void exitExpOU(ExpOUContext ctx) {
-		final Bool a = valores.pegue(ctx.booleano());
-		final Bool b = valores.pegue(ctx.booleano());
-		valores.insira(ctx, new ExpOU(a,b));
+	
+	public void exitExpOU(ELogicoContext ctx) {
+		final Bool esq = valores.pegue(ctx.booleano());
+		final Bool dir = valores.pegue(ctx.booleano());
+		valores.insira(ctx, new ExpOU(esq,dir));
 	}
-	@Override
-	public void exitExpXOU(ExpXOUContext ctx) {
-		final Bool a = valores.pegue(ctx.booleano());
-		final Bool b = valores.pegue(ctx.booleano());
-		valores.insira(ctx, new ExpXOU(a,b));
+	
+	public void exitExpXOU(ELogicoContext ctx) {
+		final Bool esq = valores.pegue(ctx.booleano());
+		final Bool dir = valores.pegue(ctx.booleano());
+		valores.insira(ctx, new ExpXOU(esq,dir));
 	}
 
 	@Override
